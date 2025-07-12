@@ -5,34 +5,32 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	//"text/template/parse"
+
+	"rsc.io/quote"
 )
 
 var array_of_int []int
 
 func main() {
+	fmt.Println(quote.Go())
 
 	reader := bufio.NewReader(os.Stdin)
-
 	fmt.Print("Enter a message: ")
 	input, err := reader.ReadString('\n')
-
 	if err != nil {
-		fmt.Print("terdapat error di penggunaan")
+		fmt.Println("Error:", err)
 		return
 	}
 
-	parts := strings.SplitAfter(input, " ")
+	input = strings.TrimSpace(input)
 
-	fmt.Println(parts)
-	parts_length := len(parts)
-	array_of_int = make([]int, parts_length)
-	for i := 0; i < parts_length-1; i++ {
+	//fmt.Println(input)
+	// Gunakan struct
+	parser := Parser{}
+	test := parser.Parse(input)
+	fmt.Println(test)
+	parser.PrintLengths()
 
-		array_of_int[i] = len(parts[i]) - 1
-
-	}
-
-	for i := 0; i < parts_length-1; i++ {
-		fmt.Println(array_of_int[i])
-	}
 }
